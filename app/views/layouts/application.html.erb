@@ -9,11 +9,15 @@
 </head>
 <body>
   <div class="container">
-    <%= render "/layouts/nav" %>
+    <%= render "/layouts/shared/nav" %>
 
       <% if flash[:notice] %>
         <div class="alert alert-success">
           <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-error">
+          <%= flash[:alert] %>
         </div>
       <% end %>
 
