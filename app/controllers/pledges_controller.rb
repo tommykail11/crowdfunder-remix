@@ -7,6 +7,7 @@ class PledgesController < ApplicationController
 		if !current_user
 			redirect_to new_session_path, alert: "Please sign in to make a pledge."
 		elsif @pledge.save
+			UserMailer.new_pledge(@pledge).deliver
 			redirect_to @project, notice: "Nice! Thanks for pledging $#{@pledge.amount} for this project."
 		else
 			render 'projects/show'

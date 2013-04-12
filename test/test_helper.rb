@@ -20,6 +20,10 @@ class ActiveSupport::TestCase
     Capybara.javascript_driver = :webkit # :selenium
     self.use_transactional_fixtures = false
 
+    setup do
+      reset_email
+    end
+
     teardown do
       DatabaseCleaner.clean       # Truncate the database after each test
       Capybara.reset_sessions!    # Forget the (simulated) browser state
@@ -35,6 +39,14 @@ class ActiveSupport::TestCase
       fill_in :password, with: password
       click_button 'Login'
       user
+    end
+
+    def last_email
+      ActionMailer::Base.deliveries.last 
+    end
+
+    def reset_email
+      ActionMailer::Base.deliveries = []
     end
 
   end
