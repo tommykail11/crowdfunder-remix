@@ -8,7 +8,9 @@ CrowdfunderInClass::Application.routes.draw do
   end
 
   namespace :my do
-    resources :projects
+    resources :projects do 
+      resources :images, only: [:index, :create]
+    end
   end
 
   resources :users, :except => [:index, :destroy]
